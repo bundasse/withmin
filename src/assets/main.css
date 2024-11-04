@@ -1,0 +1,99 @@
+@import './base.css';
+ul,li{
+  list-style: none;
+}
+a{
+  text-decoration: none;
+}
+
+@font-face {
+  font-family: 'GumiRomanceTTF';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2410-1@1.0/GumiRomanceTTF.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+#app{
+  background-color: #cccccc;
+}
+
+.wrapper{
+  width: 100%;
+  max-width: 600px;
+  margin:0 auto;
+  height: 100vh;
+  background-color: white;
+}
+
+.NavContainer{
+  height: 80px;
+  border:1px solid red;
+  padding: 0 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.NavContainer .navigation{
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.titleLogo{
+  font-family: 'GumiRomanceTTF';
+  color: lightseagreen;
+}
+
+.NavContainer .navigation nav ul{
+  display: flex;
+  gap: 16px;
+}
+
+.userIcon img{
+  width: 50px;
+  height:50px;
+  border-radius: 50%;
+}
+
+.mainContainer{
+  padding: 10px 40px;
+  height: calc(100vh - 80px);
+}
+
+.myBoard{
+  background-color: lightseagreen;
+  padding: 40px;
+  border-radius: 16px;
+}
+.myBoard input[type="checkbox"]{
+  display: none;
+  position: relative;
+}
+.myBoard input[type="checkbox"]+label{
+  margin-left: 40px;
+  font-family: 'GumiRomanceTTF';
+  color: white;
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+.myBoard input[type="checkbox"]+label::before{
+  display: block;
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  margin-top: 15px;
+  border-radius: 50%;
+  font-size: 18px;
+  text-align: center;
+  background: white; 
+}
+.myBoard input[type="checkbox"]:checked+label{
+  color: yellow;
+}
+
+.myBoard input[type="checkbox"]:checked+label::before{
+  content: '🌸';
+}
+
+.friendBoard{}
