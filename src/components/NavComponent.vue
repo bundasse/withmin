@@ -1,5 +1,22 @@
 <script setup>
+import { ref } from 'vue';
 import { RouterLink } from 'vue-router'
+
+const userMenuFlg = ref(false)
+function setUserMenuFlg(value) {
+    userMenuFlg.value = value
+}
+
+document.addEventListener("click",(e)=>{
+    if(userMenuFlg.value){
+        const isUserMenu = e.composedPath().includes(document.querySelector(".userInfo"))
+        if(isUserMenu){
+            return
+        }else{
+            setUserMenuFlg(false)
+        }
+    }
+})
 </script>
 
 <template>
@@ -18,11 +35,13 @@ import { RouterLink } from 'vue-router'
             </nav>
         </div>
         <div class="userInfo">
-            <div class="userIcon">
-                <img src="https://placehold.co/200x200/orange/white" alt="usericon">
+            <div class="userMenu" @click="setUserMenuFlg(true)">
+                <div class="userIcon">
+                    <img src="https://placehold.co/200x200/orange/white" alt="usericon">
+                </div>
+                <p>username</p>
             </div>
-            <p>username</p>
-            <ul class="userNavMenu">
+            <ul v-if="userMenuFlg" class="userNavMenu">
                 <li>로그아웃</li>
             </ul>
         </div>
@@ -30,12 +49,6 @@ import { RouterLink } from 'vue-router'
   </template>
   
   <style>
-  @media (min-width: 1024px) {
-    .about {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-    }
-  }
+
   </style>
   

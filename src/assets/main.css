@@ -1,16 +1,21 @@
 @import './base.css';
-ul,li{
-  list-style: none;
-}
-a{
-  text-decoration: none;
-}
-
 @font-face {
   font-family: 'GumiRomanceTTF';
   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2410-1@1.0/GumiRomanceTTF.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ul,li{
+  list-style: none;
+}
+a{
+  text-decoration: none;
 }
 
 #app{
@@ -47,6 +52,16 @@ a{
 .NavContainer .navigation nav ul{
   display: flex;
   gap: 16px;
+}
+
+.userInfo{
+  cursor: pointer;
+}
+
+.userMenu{
+  display: flex;
+  gap:16px;
+  align-items: center;
 }
 
 .userIcon img{
