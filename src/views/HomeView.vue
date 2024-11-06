@@ -10,9 +10,15 @@
       </label>
     </div>
     <div class="friendBoard">
-      <h1>친구목록</h1>
-      <ul>
-        <li>닉네임</li>
+      <ul class="friendList">
+        <li v-for="user in 5" :key="user">
+          <div class="userIcon">
+            <img src="https://placehold.co/50x50/orange/white" alt="usericon">
+          </div>
+          <p>
+            닉네임
+          </p>
+        </li>
       </ul>
     </div>
   </div>

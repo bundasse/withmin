@@ -3,9 +3,15 @@ import { ref } from 'vue';
 import { RouterLink } from 'vue-router'
 
 const userMenuFlg = ref(false)
+const nowMenu = ref('home')
 function setUserMenuFlg(value) {
     userMenuFlg.value = value
 }
+
+function setNowMenu(value) {
+    nowMenu.value = value
+}
+
 
 document.addEventListener("click",(e)=>{
     if(userMenuFlg.value){
@@ -25,10 +31,10 @@ document.addEventListener("click",(e)=>{
             <h1 class="titleLogo">위드민</h1>
             <nav>
                 <ul>
-                    <li>
+                    <li @click="setNowMenu('home')" :class="nowMenu == 'home' && 'nowMenu'">
                         <RouterLink to="/">Home</RouterLink>
                     </li>
-                    <li>
+                    <li @click="setNowMenu('search')" :class="nowMenu == 'search' && 'nowMenu'">
                         <RouterLink to="/search">검색</RouterLink>
                     </li>
                 </ul>
