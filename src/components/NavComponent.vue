@@ -14,13 +14,11 @@ function setNowMenu(value) {
 
 
 document.addEventListener("click",(e)=>{
-    if(userMenuFlg.value){
-        const isUserMenu = e.composedPath().includes(document.querySelector(".userInfo"))
-        if(isUserMenu){
-            return
-        }else{
-            setUserMenuFlg(false)
-        }
+    const isUserMenu = e.composedPath().includes(document.querySelector(".userInfo"))
+    if(isUserMenu && userMenuFlg.value){
+        return
+    }else{
+        setUserMenuFlg(false)
     }
 })
 </script>
