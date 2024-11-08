@@ -15,10 +15,16 @@ function setNowMenu(value) {
 
 document.addEventListener("click",(e)=>{
     const isUserMenu = e.composedPath().includes(document.querySelector(".userInfo"))
-    if(isUserMenu && userMenuFlg.value){
-        return
-    }else{
-        setUserMenuFlg(false)
+    if(isUserMenu){
+        if(userMenuFlg.value){
+            if(e.composedPath().includes(document.querySelector(".userNavMenu"))){
+                return
+            }else{
+                setUserMenuFlg(false)
+            }
+        }else{
+            userMenuFlg.value = true
+        }
     }
 })
 </script>
@@ -39,7 +45,7 @@ document.addEventListener("click",(e)=>{
             </nav>
         </div>
         <div class="userInfo">
-            <div class="userMenu" @click="setUserMenuFlg(true)">
+            <div class="userMenu">
                 <div class="userIcon">
                     <img src="https://placehold.co/200x200/orange/white" alt="usericon">
                 </div>
