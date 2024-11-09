@@ -9,6 +9,9 @@ function checkMushroom() {
 }
 
 function setPopupFlg(value) {
+  if(value && usedFlg.value){
+    return;
+  }
   popupFlg.value = value
 }
 </script>

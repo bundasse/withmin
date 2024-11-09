@@ -35,7 +35,7 @@ a{
 
 .NavContainer{
   height: 80px;
-  padding: 0 40px;
+  padding: 0 12px;
   display: flex;
   position: relative;
   background: white;
@@ -82,7 +82,7 @@ a{
 
 .userMenu{
   display: flex;
-  gap:16px;
+  gap:8px;
   align-items: center;
 }
 
@@ -95,7 +95,7 @@ a{
   position: absolute;
   top: 78px;
   right: 0;
-  width: 200px;
+  width: 140px;
   padding: 10px;
   border-radius: 0 0 10px 10px;
   background-color: white;
@@ -103,44 +103,46 @@ a{
 }
 
 .mainContainer{
-  padding: 10px 40px;
+  padding: 40px 20px 10px;
   height: calc(100vh - 80px);
 }
 
 .myBoard{
   background-color: lightseagreen;
-  padding: 40px;
+  padding: 20px 28px;
   border-radius: 16px;
+}
+.myBoard:has(input[type="checkbox"]:checked){
+  background-color: crimson;
 }
 .myBoard input[type="checkbox"]{
   display: none;
   position: relative;
 }
 .myBoard input[type="checkbox"]+label{
-  margin-left: 40px;
+  margin-left: 28px;
   font-family: 'GumiRomanceTTF';
   color: white;
-  font-size: 2.5rem;
+  font-size: 1.6rem;
   cursor: pointer;
 }
 .myBoard input[type="checkbox"]+label::before{
   display: block;
   content: '';
   position: absolute;
-  width: 30px;
-  height: 30px;
-  margin-top: 15px;
+  width: 20px;
+  height: 20px;
+  margin-top: 10px;
   border-radius: 50%;
-  font-size: 18px;
   text-align: center;
   background: white; 
 }
 .myBoard input[type="checkbox"]:checked+label{
-  color: yellow;
+  color: moccasin;
 }
 
 .myBoard input[type="checkbox"]:checked+label::before{
-  background: yellow;
+  background: moccasin;
 }
 
 .friendBoard{
@@ -148,7 +150,7 @@ a{
 }
 
 .friendBoard .friendList{
-  padding: 20px;
+  padding: 20px 28px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
   border-radius: 16px;
 }
