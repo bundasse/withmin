@@ -23,7 +23,7 @@ document.addEventListener("click",(e)=>{
                 setUserMenuFlg(false)
             }
         }else{
-            userMenuFlg.value = true
+            setUserMenuFlg(true)
         }
     }
 })
@@ -49,7 +49,6 @@ document.addEventListener("click",(e)=>{
                 <div class="userIcon">
                     <img src="https://placehold.co/200x200/orange/white" alt="usericon">
                 </div>
-                <p>username</p>
             </div>
             <ul v-if="userMenuFlg" class="userNavMenu">
                 <li>로그아웃</li>
