@@ -18,6 +18,7 @@ function setPopupFlg(value) {
 
 <template>
   <div>
+    {{ store.state.userId }}
     <div class="myBoard" @click="setPopupFlg(true)">
       <input type="checkbox" name="mushroomEnd" id="mushroomEnd" @click.prevent v-model="usedFlg">
       <label for="mushroomEnd">
