@@ -1,9 +1,13 @@
 <script setup>
 import {ref} from 'vue';
+import { auth } from '@/firebase';
+
+
 const idValue = ref()
 const passwordValue = ref()
 const usernameValue = ref()
 const pikminNameValue = ref()
+const userpicUrl = ref()
 const twitterValue = ref()
 
 const errFlgId = ref(false)
@@ -11,7 +15,13 @@ const errFlgPassword = ref(false)
 const errMsgId = ref('')
 const errMsgPassword = ref('')
 
-function joinCommand() {
+async function joinCommand() {
+  await auth.createUserWithEmailAndPassword(idValue.value,passwordValue.value).then(res => {
+    res.user.updateProfile({
+      displayName:usernameValue.value,
+      photoURL:userpicUrl.value,
+    })
+  })
     console.log(idValue.value, passwordValue.value)
 }
 
@@ -21,22 +31,25 @@ function joinCommand() {
   <div>
     <div class="joinPage">
         <div>
+          <p class="desc">*표시는 필수 입력 사항입니다</p>
           <div class="inputField">
-            <label for="txtId">아이디</label>
-            <input type="text" placeholder="영문 5글자 이상" id="txtId" v-model="idValue">
-            <button class="checkButton">중복확인</button>
+            <label for="txtId">이메일*</label>
+            <div class="inputId">
+              <input type="email" id="txtId" v-model="idValue">
+              <button class="checkButton">중복확인</button>
+            </div>
           </div>
           <p class="errMsgField" v-if="errFlgId">{{ errMsgId }}</p>
         </div>
         <div>
           <div class="inputField">
-            <label for="txtPassword">비밀번호</label>
+            <label for="txtPassword">비밀번호*</label>
             <input type="password" placeholder="영문/숫자 6글자 이상" id="txtPassword" v-model="passwordValue">
           </div>
           <p class="errMsgField" v-if="errFlgPassword">{{ errMsgPassword }}</p>
         </div>
         <div class="inputField">
-          <label for="txtUsername">닉네임</label>
+          <label for="txtUsername">닉네임*</label>
           <input type="text" id="txtUsername" v-model="usernameValue">
         </div>
         <div class="inputField">

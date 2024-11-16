@@ -1,7 +1,15 @@
 <script setup>
-import {ref} from 'vue';
+import router from '@/router';
+import {ref, onMounted} from 'vue';
 const usedFlg = ref(false);
 const popupFlg = ref(false)
+
+onMounted(()=>{
+  const userId = localStorage.getItem('userId');
+  if(userId == null){
+    router.replace('/login')
+  }
+})
 
 function checkMushroom() {
   usedFlg.value = true
@@ -17,9 +25,7 @@ function setPopupFlg(value) {
 </script>
 
 <template>
-  <div>
-    {{ store.state.userId }}
-    
+  <div>    
     <div class="myBoard" @click="setPopupFlg(true)">
       <input type="checkbox" name="mushroomEnd" id="mushroomEnd" @click.prevent v-model="usedFlg">
       <label for="mushroomEnd">

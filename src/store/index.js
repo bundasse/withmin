@@ -2,8 +2,8 @@ import { createStore } from "vuex";
 
 export default createStore({
   state: {
-    userId: '',
-    username:'',
+    userId: null,
+    username: null,
   },
   getters: {
     time2(state) {

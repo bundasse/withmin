@@ -12,6 +12,10 @@ function setNowMenu(value) {
     nowMenu.value = value
 }
 
+function logOutCommand() {
+    
+}
+
 
 document.addEventListener("click",(e)=>{
     const isUserMenu = e.composedPath().includes(document.querySelector(".userInfo"))
@@ -24,6 +28,12 @@ document.addEventListener("click",(e)=>{
             }
         }else{
             setUserMenuFlg(true)
+        }
+    }else{
+        if(userMenuFlg.value){
+            if(!e.composedPath().includes(document.querySelector(".userNavMenu"))){
+                setUserMenuFlg(false)
+            }
         }
     }
 })
@@ -51,7 +61,7 @@ document.addEventListener("click",(e)=>{
                 </div>
             </div>
             <ul v-if="userMenuFlg" class="userNavMenu">
-                <li>로그아웃</li>
+                <li @click="logOutCommand">로그아웃</li>
             </ul>
         </div>
     </div>
