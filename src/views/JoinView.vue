@@ -1,6 +1,6 @@
 <script setup>
 import {ref} from 'vue';
-import { auth } from '@/firebase';
+import { auth, db } from '@/firebase';
 
 
 const idValue = ref()
@@ -16,10 +16,18 @@ const errMsgId = ref('')
 const errMsgPassword = ref('')
 
 async function joinCommand() {
-  await auth.createUserWithEmailAndPassword(idValue.value,passwordValue.value).then(res => {
-    res.user.updateProfile({
+  await auth.createUserWithEmailAndPassword(idValue.value,passwordValue.value).then(async res => {
+    await res.user.updateProfile({
       displayName:usernameValue.value,
       photoURL:userpicUrl.value,
+    })
+    await db.collection("user").add({
+      userId:idValue.value,
+      password:passwordValue.value,
+      userName:usernameValue.value,
+      twitId:twitterValue.value,
+      pikName:pikminNameValue.value,
+      chkMush:false,
     })
   })
     console.log(idValue.value, passwordValue.value)
