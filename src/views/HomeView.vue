@@ -1,13 +1,20 @@
 <script setup>
 import router from '@/router';
 import {ref, onMounted} from 'vue';
+import { db } from '@/firebase';
 const usedFlg = ref(false);
 const popupFlg = ref(false)
+
+const friendList = ref([])
 
 onMounted(()=>{
   const userId = localStorage.getItem('userId');
   if(userId == null){
     router.replace('/login')
+  }else{
+    db.collection("friendList").whereEqualTo("userId",userId).get().then(res => {
+      friendList.value = res.data
+    })
   }
 })
 
@@ -34,7 +41,7 @@ function setPopupFlg(value) {
     </div>
     <div class="friendBoard">
       <ul class="friendList">
-        <li v-for="user in 5" :key="user">
+        <li v-for="(user,i) in friendList" :key="i">
           <div class="userIcon">
             <img src="https://placehold.co/50x50/orange/white" alt="usericon">
           </div>
