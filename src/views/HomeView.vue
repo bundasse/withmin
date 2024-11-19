@@ -14,6 +14,7 @@ onMounted(()=>{
   }else{
     db.collection("friendList").whereEqualTo("userId",userId).get().then(res => {
       friendList.value = res.data
+      console.log(res.data)
     })
   }
 })
