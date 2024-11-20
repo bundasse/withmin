@@ -341,19 +341,6 @@ margin-bottom: 20px;
   padding: 8px;
   border-radius: 4px;
 }
-.joinPage .inputField .inputId{
-  display: flex;
-  align-items: center;
-}
-.joinPage .checkButton{
-  width: 130px;
-  margin-left: 8px;
-  padding: 10px 12px;
-  border:0;
-  border-radius: 4px;
-  background: lightseagreen;
-  color: white;
-}
 .joinPage .checkButton.checked{
   background: #cccccc;
   color:black;

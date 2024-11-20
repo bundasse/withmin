@@ -33,6 +33,15 @@ async function joinCommand() {
     console.log(idValue.value, passwordValue.value)
 }
 
+function duplicateCheck() {
+  db.collection("user").whereEqualTo("userId",idValue.value).get().then(res => {
+      if(res.data.length >0){
+        errMsgId.value = '이미 가입된 메일 주소입니다.'
+      }
+    })
+  
+}
+
 </script>
 
 <template>
@@ -42,10 +51,7 @@ async function joinCommand() {
           <p class="desc">*표시는 필수 입력 사항입니다</p>
           <div class="inputField">
             <label for="txtId">이메일*</label>
-            <div class="inputId">
-              <input type="email" id="txtId" v-model="idValue">
-              <button class="checkButton">중복확인</button>
-            </div>
+            <input type="email" id="txtId" v-model="idValue">
           </div>
           <p class="errMsgField" v-if="errFlgId">{{ errMsgId }}</p>
         </div>
@@ -70,6 +76,5 @@ async function joinCommand() {
         </div>
         <button class="joinButton" @click="joinCommand">가입</button>
     </div>
-
   </div>
 </template>
