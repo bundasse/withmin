@@ -10,12 +10,13 @@ const pikminNameValue = ref()
 const userpicUrl = ref()
 const twitterValue = ref()
 
-const errFlgId = ref(false)
-const errFlgPassword = ref(false)
-const errMsgId = ref('')
-const errMsgPassword = ref('')
+const errFlg = ref(false)
+const errMsg = ref('')
 
 async function joinCommand() {
+  
+  let check = joinCheck()
+  if(!check) return
   await auth.createUserWithEmailAndPassword(idValue.value,passwordValue.value).then(async res => {
     await res.user.updateProfile({
       displayName:usernameValue.value,
@@ -33,12 +34,33 @@ async function joinCommand() {
     console.log(idValue.value, passwordValue.value)
 }
 
-function duplicateCheck() {
+function joinCheck() {
+  if(idValue.value == null || idValue.value == ''){
+      errFlg.value = true;
+        errMsg.value = '이메일은 필수 입력 사항입니다.'
+        return false
+    }
   db.collection("user").whereEqualTo("userId",idValue.value).get().then(res => {
       if(res.data.length >0){
-        errMsgId.value = '이미 가입된 메일 주소입니다.'
+        errFlg.value = true;
+        errMsg.value = '이미 가입된 메일 주소입니다.'
+        return false
       }
     })
+    if(passwordValue.value == null || passwordValue.value == ''){
+      errFlg.value = true;
+        errMsg.value = '비밀번호는 필수 입력 사항입니다.'
+        return false
+    }else if(passwordValue.value.length <6){
+      errFlg.value = true;
+        errMsg.value = '비밀번호는 영문/숫자 조합의 6글자 이상이 되어야 합니다.'
+        return false
+    }
+    if(usernameValue.value == null || usernameValue.value == ''){
+      errFlg.value = true;
+        errMsg.value = '닉네임은 필수 입력 사항입니다.'
+    }
+    
   
 }
 
@@ -53,26 +75,23 @@ function duplicateCheck() {
             <label for="txtId">이메일*</label>
             <input type="email" id="txtId" v-model="idValue">
           </div>
-          <p class="errMsgField" v-if="errFlgId">{{ errMsgId }}</p>
-        </div>
-        <div>
           <div class="inputField">
             <label for="txtPassword">비밀번호*</label>
             <input type="password" placeholder="영문/숫자 6글자 이상" id="txtPassword" v-model="passwordValue">
           </div>
-          <p class="errMsgField" v-if="errFlgPassword">{{ errMsgPassword }}</p>
-        </div>
-        <div class="inputField">
-          <label for="txtUsername">닉네임*</label>
-          <input type="text" id="txtUsername" v-model="usernameValue">
-        </div>
-        <div class="inputField">
-            <label for="txtPikminName">피크민 닉네임</label>
-            <input type="text" id="txtPikminName" v-model="pikminNameValue">
-        </div>
-        <div class="inputField">
-            <label for="txtTwitter">트위터 아이디</label>
-            <input type="text" id="txtTwitter" v-model="twitterValue">
+          <div class="inputField">
+            <label for="txtUsername">닉네임*</label>
+            <input type="text" id="txtUsername" v-model="usernameValue">
+          </div>
+          <div class="inputField">
+              <label for="txtPikminName">피크민 닉네임</label>
+              <input type="text" id="txtPikminName" v-model="pikminNameValue">
+          </div>
+          <div class="inputField">
+              <label for="txtTwitter">트위터 아이디</label>
+              <input type="text" id="txtTwitter" v-model="twitterValue">
+          </div>
+          <p class="errMsgField" v-if="errFlg">{{ errMsg }}</p>
         </div>
         <button class="joinButton" @click="joinCommand">가입</button>
     </div>
