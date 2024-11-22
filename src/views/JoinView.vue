@@ -35,6 +35,8 @@ async function joinCommand() {
 }
 
 function joinCheck() {
+  const regexId = new RegExp(/^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/);
+  const regexPass = new RegExp(/[a-zA-Z0-9]/);
   if(idValue.value == null || idValue.value == ''){
       errFlg.value = true;
         errMsg.value = '이메일은 필수 입력 사항입니다.'
@@ -51,7 +53,7 @@ function joinCheck() {
       errFlg.value = true;
         errMsg.value = '비밀번호는 필수 입력 사항입니다.'
         return false
-    }else if(passwordValue.value.length <6){
+    }else if(passwordValue.value.length <6||!regexPass.test(passwordValue.value)){
       errFlg.value = true;
         errMsg.value = '비밀번호는 영문/숫자 조합의 6글자 이상이 되어야 합니다.'
         return false
@@ -59,9 +61,17 @@ function joinCheck() {
     if(usernameValue.value == null || usernameValue.value == ''){
       errFlg.value = true;
         errMsg.value = '닉네임은 필수 입력 사항입니다.'
+        return false
     }
+    if(!regexId.test(idValue.value)){
+        errFlg.value = true;
+        errMsg.value = '올바른 이메일 형식이 아닙니다.'
+        return false
+    }
+
     
-  
+  errFlg.value = false;
+  return true
 }
 
 </script>
