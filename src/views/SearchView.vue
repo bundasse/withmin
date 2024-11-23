@@ -15,7 +15,7 @@ function searchCommand() {
   <div>
     <div class="searchBox">
       <div class="inputContainer">
-        <input type="text" class="searchBar" placeholder="닉네임, 트위터아이디 등으로 검색해보세요" v-model="searchText" @keyup.enter="searchCommand">
+        <input type="text" class="searchBar" placeholder="닉네임, 트위터아이디, 피크민아이디" v-model="searchText" @keyup.enter="searchCommand">
         <button class="searchButton" @click="searchCommand"><font-awesome-icon icon="fa-solid fa-magnifying-glass" size="2xl"/></button>
       </div>
     </div>
