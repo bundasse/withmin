@@ -1,5 +1,6 @@
 <script setup>
 import {ref} from 'vue';
+import { db } from '@/firebase';
 
 const searchText = ref('')
 const dataList = ref(['data'])
@@ -7,7 +8,9 @@ function addFriendCommand(value) {
   console.log(value)
 }
 function searchCommand() {
-  alert("!")
+  db.collection("user").orderBy("userId").startAt(searchText.value).endAt(searchText.value+"\uf8ff").get().then(res => {
+    dataList.value = res.data
+  })
 }
 </script>
 
