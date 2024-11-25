@@ -21,7 +21,10 @@ onMounted(()=>{
 
 function checkMushroom() {
   usedFlg.value = true
-  setPopupFlg(false)
+  db.collection("user").add({
+    userId:localStorage.getItem('userId'),
+    chkMush:true,
+  })
 }
 
 function setPopupFlg(value) {
