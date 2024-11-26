@@ -1,6 +1,6 @@
 <script setup>
-import store from '@/store';
-import { auth,db } from '@/firebase';
+// import store from '@/store';
+import { auth } from '@/firebase';
 import {ref} from 'vue';
 import { RouterLink } from 'vue-router'
 import router from '@/router';
