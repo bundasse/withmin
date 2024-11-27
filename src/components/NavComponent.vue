@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from 'vue';
 import { RouterLink } from 'vue-router'
+import { auth } from '@/firebase';
+import router from '@/router';
 
 const userMenuFlg = ref(false)
 const nowMenu = ref('home')
@@ -11,9 +13,10 @@ function setUserMenuFlg(value) {
 function setNowMenu(value) {
     nowMenu.value = value
 }
-
 function logOutCommand() {
-    
+    auth.signOut(localStorage.getItem('userId')).then(()=>{
+        router.replace("/login")
+    })
 }
 
 
