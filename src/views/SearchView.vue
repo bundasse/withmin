@@ -1,16 +1,33 @@
 <script setup>
-import {ref} from 'vue';
+import {ref, onMounted} from 'vue';
 import { db } from '@/firebase';
 
 const searchText = ref('')
-const dataList = ref(['data'])
+const dataList = ref([])
+const datalist = ref(['data'])
 function addFriendCommand(value) {
   console.log(value)
 }
-function searchCommand() {
-  db.collection("user").orderBy("userId").startAt(searchText.value).endAt(searchText.value+"\uf8ff").get().then(res => {
-    dataList.value = res.data
+
+onMounted(() => {
+  getData()
+})
+ 
+function getData() {
+  db.collection("user").get().then(res => {
+    datalist.value = res.data
   })
+}
+function searchCommand() {
+  if(searchText.value == '' || searchText.value == null){
+    dataList.value = []
+  }else{
+    let arr = datalist.value.filter(e => {
+      return e.userName == searchText.value || e.twitId == searchText.value || e.pikId == searchText.value
+    })
+    dataList.value = arr
+  }
+
 }
 </script>
 
