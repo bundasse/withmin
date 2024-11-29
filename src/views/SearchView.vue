@@ -50,7 +50,7 @@ function searchCommand() {
               <img src="https://placehold.co/50x50/orange/white" alt="usericon">
             </div>
             <p>
-              닉네임
+              {{data.userName}}
             </p>
           </div>
           <button class="addFriend" @click="addFriendCommand(data)">추가</button>
