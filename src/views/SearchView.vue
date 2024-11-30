@@ -23,11 +23,10 @@ function searchCommand() {
     dataList.value = []
   }else{
     let arr = datalist.value.filter(e => {
-      return e.userName == searchText.value || e.twitId == searchText.value || e.pikId == searchText.value
+      return e.userName.includes(searchText.value) || e.twitId.includes(searchText.value) || e.pikName.includes(searchText.value)
     })
     dataList.value = arr
   }
-
 }
 </script>
 
@@ -35,7 +34,7 @@ function searchCommand() {
   <div>
     <div class="searchBox">
       <div class="inputContainer">
-        <input type="text" class="searchBar" placeholder="닉네임, 트위터아이디, 피크민아이디" v-model="searchText" @keyup.enter="searchCommand">
+        <input type="text" class="searchBar" placeholder="닉네임, 트위터아이디, 피크민닉네임" v-model="searchText" @keyup.enter="searchCommand">
         <button class="searchButton" @click="searchCommand"><font-awesome-icon icon="fa-solid fa-magnifying-glass" size="2xl"/></button>
       </div>
     </div>
