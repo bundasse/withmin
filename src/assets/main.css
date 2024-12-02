@@ -248,8 +248,7 @@ input:focus{
 .searchResults{
   margin-top: 60px;
   padding: 20px 28px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-  border-radius: 16px;
+  border-top:1px solid #333333;
 }
 
 .searchResults .searchResults_null{
@@ -276,8 +275,8 @@ input:focus{
   color: white;
 }
 .searchResults ul li .addFriend.added{
-  background: #cccccc;
-  color: black;
+  background: #cccccc !important;
+  color: black !important;
 }
 
 /* 로그인 페이지 */

@@ -5,7 +5,9 @@ import { db } from '@/firebase';
 const searchText = ref('')
 const dataList = ref([])
 const datalist = ref(['data'])
+const friendList = ref([])
 function addFriendCommand(value) {
+  if(value.added) return;
   console.log(value)
 }
 
@@ -17,13 +19,25 @@ function getData() {
   db.collection("user").get().then(res => {
     datalist.value = res.data
   })
+  db.collection("friendList").whereEqualTo("userId",localStorage.getItem("userid")).get().then(res => {
+    friendList.value = res.data
+  })
 }
+
 function searchCommand() {
   if(searchText.value == '' || searchText.value == null){
     dataList.value = []
   }else{
     let arr = datalist.value.filter(e => {
       return e.userName.includes(searchText.value) || e.twitId.includes(searchText.value) || e.pikName.includes(searchText.value)
+    })
+    arr.forEach(e => {
+      let id = e.userId
+      let idx = friendList.value.findIndex(data => data.userId === id)
+      if(idx != -1){
+        e.added = true
+      }
+
     })
     dataList.value = arr
   }
@@ -52,7 +66,7 @@ function searchCommand() {
               {{data.userName}}
             </p>
           </div>
-          <button class="addFriend" @click="addFriendCommand(data)">추가</button>
+          <button class="addFriend" :class="data.added && 'added'" @click="addFriendCommand(data)">추가</button>
         </li>
       </ul>
     </div>
