@@ -12,18 +12,41 @@ onMounted(()=>{
     router.replace('/login')
   }else{
     db.collection("user").whereEqualTo("userId",userId).get().then(res => {
-      if(res.data.chkMush){
+      let checked = todayMushChecked(res.data.lastChkMush)
+      if(res.data.chkMush && checked){
         usedFlg.value = true
       }
       friendList.value = res.data.friendList
     })
+    getFriendMush()
   }
 })
+
+function getFriendMush() {
+  friendList.value.forEach(e => {
+    db.collection("user").whereEqualTo("userId",e.userId).get().then(res => {
+      let checked = todayMushChecked(res.data.lastChkMush)
+      if(res.data.chkMush && checked){
+        e.chkMush = true
+      }else{
+        e.chkMush = false
+      }
+    })
+  })
+
+}
+
+function todayMushChecked(value) {
+  let date = new Date(value)
+  let today = new Date()
+  return date.getFullYear() == today.getFullYear() && date.getMonth() == today.getMonth() && date.getDate() == today.getDate()
+}
 
 function checkMushroom() {
   usedFlg.value = true
   db.collection("user").whereEqualTo("userId",userId).update({
     chkMush:true,
+    lastChkMush:new Date()
   })
 }
 
@@ -46,10 +69,10 @@ function setPopupFlg(value) {
     <div class="friendBoard">
       <ul class="friendList">
         <li v-for="(user,i) in friendList" :key="i">
-          <div class="userIcon">
+          <div class="userIcon" :style="user.chkMush && 'opacity:0.5'">
             <img src="https://placehold.co/50x50/orange/white" alt="usericon">
           </div>
-          <p>
+          <p :style="user.chkMush && 'opacity:0.5'">
             닉네임
           </p>
         </li>
