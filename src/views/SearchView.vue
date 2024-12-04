@@ -1,14 +1,16 @@
 <script setup>
 import {ref, onMounted} from 'vue';
-import { db } from '@/firebase';
+import { db,arrayUnion } from '@/firebase';
 
 const searchText = ref('')
 const dataList = ref([])
 const datalist = ref(['data'])
 const friendList = ref([])
+const userId = localStorage.getItem('userId');
+
 function addFriendCommand(value) {
   if(value.added) return;
-  console.log(value)
+  db.collection("user").whereEqualTo("userId",userId).update({friendList:arrayUnion(value.userId)})
 }
 
 onMounted(() => {
@@ -16,11 +18,12 @@ onMounted(() => {
 })
  
 function getData() {
+
+  db.collection("user").whereEqualTo("userId",userId).get().then(res => {
+    friendList.value = res.data.friendList
+  })
   db.collection("user").get().then(res => {
     datalist.value = res.data
-  })
-  db.collection("friendList").whereEqualTo("userId",localStorage.getItem("userid")).get().then(res => {
-    friendList.value = res.data
   })
 }
 

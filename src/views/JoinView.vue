@@ -29,9 +29,9 @@ async function joinCommand() {
       twitId:twitterValue.value,
       pikName:pikminNameValue.value,
       chkMush:false,
+      friendList:[]
     })
   })
-    console.log(idValue.value, passwordValue.value)
 }
 
 function joinCheck() {

@@ -6,22 +6,23 @@ const usedFlg = ref(false);
 const popupFlg = ref(false)
 
 const friendList = ref([])
-
+const userId = localStorage.getItem('userId');
 onMounted(()=>{
-  const userId = localStorage.getItem('userId');
   if(userId == null){
     router.replace('/login')
   }else{
-    db.collection("friendList").whereEqualTo("userId",userId).get().then(res => {
-      friendList.value = res.data
+    db.collection("user").whereEqualTo("userId",userId).get().then(res => {
+      if(res.data.chkMush){
+        usedFlg.value = true
+      }
+      friendList.value = res.data.friendList
     })
   }
 })
 
 function checkMushroom() {
   usedFlg.value = true
-  db.collection("user").add({
-    userId:localStorage.getItem('userId'),
+  db.collection("user").whereEqualTo("userId",userId).update({
     chkMush:true,
   })
 }
