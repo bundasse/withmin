@@ -100,6 +100,10 @@ function joinCheck() {
               <label for="txtTwitter">트위터 아이디</label>
               <input type="text" id="txtTwitter" v-model="twitterValue">
           </div>
+          <div class="inputField">
+            <label for="profilePic">프로필 이미지</label>
+            <input type="file" name="profilePic" id="profilePic">
+          </div>
           <p class="errMsgField" v-if="errFlg">{{ errMsg }}</p>
         </div>
         <button class="joinButton" @click="joinCommand">가입</button>
