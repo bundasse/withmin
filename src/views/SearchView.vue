@@ -62,9 +62,9 @@ function searchCommand() {
       <ul v-else>
         <li v-for="(data,i) in dataList" :key="i">
           <div class="userProfile">
-            <div class="userIcon">
+            <!-- <div class="userIcon">
               <img src="https://placehold.co/50x50/orange/white" alt="usericon">
-            </div>
+            </div> -->
             <p>
               {{data.userName}}
             </p>

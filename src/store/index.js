@@ -11,8 +11,11 @@ export default createStore({
     }
   },
   mutations: {
-    setCounter(state, value) {
-      state.counter = value;
+    setUserId(state,value){
+      state.userId = value
+    },
+    setUsername(state, value) {
+      state.username = value;
     }
   }
 });

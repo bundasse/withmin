@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import { RouterLink } from 'vue-router'
 import { auth } from '@/firebase';
 import router from '@/router';
+import store from '@/store';
 
 const userMenuFlg = ref(false)
 const nowMenu = ref('home')
@@ -59,9 +60,10 @@ document.addEventListener("click",(e)=>{
         </div>
         <div class="userInfo">
             <div class="userMenu">
-                <div class="userIcon">
+                <!-- <div class="userIcon">
                     <img src="https://placehold.co/200x200/orange/white" alt="usericon">
-                </div>
+                </div> -->
+                {{ store.state.username }}
             </div>
             <ul v-if="userMenuFlg" class="userNavMenu">
                 <li @click="logOutCommand">로그아웃</li>

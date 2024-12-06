@@ -2,6 +2,7 @@
 import router from '@/router';
 import {ref, onMounted} from 'vue';
 import { db } from '@/firebase';
+
 const usedFlg = ref(false);
 const popupFlg = ref(false)
 
@@ -69,11 +70,11 @@ function setPopupFlg(value) {
     <div class="friendBoard">
       <ul class="friendList">
         <li v-for="(user,i) in friendList" :key="i">
-          <div class="userIcon" :style="user.chkMush && 'opacity:0.5'">
+          <!-- <div class="userIcon" :style="user.chkMush && 'opacity:0.5'">
             <img src="https://placehold.co/50x50/orange/white" alt="usericon">
-          </div>
+          </div> -->
           <p :style="user.chkMush && 'opacity:0.5'">
-            닉네임
+            {{user.userName}}
           </p>
         </li>
       </ul>

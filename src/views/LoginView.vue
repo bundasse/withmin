@@ -4,6 +4,7 @@ import { auth } from '@/firebase';
 import {ref} from 'vue';
 import { RouterLink } from 'vue-router'
 import router from '@/router';
+import store from '@/store';
 
 const idValue = ref()
 const passwordValue = ref()
@@ -13,8 +14,10 @@ function loginCommand() {
 
       localStorage.setItem("refreshToken",res.user.refreshToken)
       localStorage.setItem("username",res.user.displayName)
+      store.commit('setUsername',res.user.displayName)
       router.replace("/")
     }) 
+
 }
 
 </script>
