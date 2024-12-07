@@ -1,6 +1,6 @@
 <script setup>
 import {ref} from 'vue';
-import { auth, db } from '@/firebase';
+import  firebase from '@/firebase';
 
 
 const idValue = ref()
@@ -17,12 +17,12 @@ async function joinCommand() {
   
   let check = joinCheck()
   if(!check) return
-  await auth.createUserWithEmailAndPassword(idValue.value,passwordValue.value).then(async res => {
+  await firebase.auth.createUserWithEmailAndPassword(idValue.value,passwordValue.value).then(async res => {
     await res.user.updateProfile({
       displayName:usernameValue.value,
       photoURL:userpicUrl.value,
     })
-    await db.collection("user").add({
+    await firebase.db.collection("user").add({
       userId:idValue.value,
       password:passwordValue.value,
       userName:usernameValue.value,
@@ -35,7 +35,7 @@ async function joinCommand() {
 }
 
 function joinCheck() {
-  const regexId = new RegExp(/^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/);
+  const regexId = new RegExp(/^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/);
   const regexPass = new RegExp(/[a-zA-Z0-9]/);
   if(idValue.value == null || idValue.value == ''){
     errFlg.value = true;
@@ -61,7 +61,7 @@ function joinCheck() {
     errMsg.value = '올바른 이메일 형식이 아닙니다.'
     return false
   }
-  db.collection("user").whereEqualTo("userId",idValue.value).get().then(res => {
+  firebase.db.collection("user").whereEqualTo("userId",idValue.value).get().then(res => {
     if(res.data.length >0){
       errFlg.value = true;
       errMsg.value = '이미 가입된 메일 주소입니다.'

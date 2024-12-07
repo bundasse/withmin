@@ -1,7 +1,7 @@
 <script setup>
 import router from '@/router';
 import {ref, onMounted} from 'vue';
-import { db } from '@/firebase';
+import firebase from '@/firebase';
 
 const usedFlg = ref(false);
 const popupFlg = ref(false)
@@ -12,7 +12,7 @@ onMounted(()=>{
   if(userId == null){
     router.replace('/login')
   }else{
-    db.collection("user").whereEqualTo("userId",userId).get().then(res => {
+    firebase.db.collection("user").whereEqualTo("userId",userId).get().then(res => {
       let checked = todayMushChecked(res.data.lastChkMush)
       if(res.data.chkMush && checked){
         usedFlg.value = true
@@ -25,7 +25,7 @@ onMounted(()=>{
 
 function getFriendMush() {
   friendList.value.forEach(e => {
-    db.collection("user").whereEqualTo("userId",e.userId).get().then(res => {
+    firebase.db.collection("user").whereEqualTo("userId",e.userId).get().then(res => {
       let checked = todayMushChecked(res.data.lastChkMush)
       if(res.data.chkMush && checked){
         e.chkMush = true
@@ -45,7 +45,7 @@ function todayMushChecked(value) {
 
 function checkMushroom() {
   usedFlg.value = true
-  db.collection("user").whereEqualTo("userId",userId).update({
+  firebase.db.collection("user").whereEqualTo("userId",userId).update({
     chkMush:true,
     lastChkMush:new Date()
   })

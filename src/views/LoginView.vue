@@ -1,6 +1,6 @@
 <script setup>
 // import store from '@/store';
-import { auth } from '@/firebase';
+import firebase from '@/firebase';
 import {ref} from 'vue';
 import { RouterLink } from 'vue-router'
 import router from '@/router';
@@ -10,7 +10,7 @@ const idValue = ref()
 const passwordValue = ref()
 
 function loginCommand() {
-    auth.signInWithEmailAndPassword(idValue.value, passwordValue.value).then(res => {
+    firebase.auth.signInWithEmailAndPassword(idValue.value, passwordValue.value).then(res => {
 
       localStorage.setItem("refreshToken",res.user.refreshToken)
       localStorage.setItem("username",res.user.displayName)
