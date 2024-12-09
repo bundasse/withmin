@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import firebase from '@/firebase';
+import {db} from '@/firebase';
 
 const searchText = ref('')
 const dataList = ref([])
@@ -10,7 +10,7 @@ const userId = localStorage.getItem('userId');
 
 function addFriendCommand(value) {
   if(value.added) return;
-  firebase.db.collection("user").whereEqualTo("userId",userId).update({friendList:firebase.arrayUnion(value.userId)})
+  db.collection("user").whereEqualTo("userId",userId).update({friendList:db.arrayUnion(value.userId)})
 }
 
 onMounted(() => {
@@ -19,10 +19,10 @@ onMounted(() => {
  
 function getData() {
 
-  firebase.db.collection("user").whereEqualTo("userId",userId).get().then(res => {
+  db.collection("user").whereEqualTo("userId",userId).get().then(res => {
     friendList.value = res.data.friendList
   })
-  firebase.db.collection("user").get().then(res => {
+  db.collection("user").get().then(res => {
     datalist.value = res.data
   })
 }

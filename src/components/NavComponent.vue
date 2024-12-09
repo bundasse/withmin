@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { RouterLink } from 'vue-router'
-import firebase from '@/firebase';
+import {auth} from '@/firebase';
 import router from '@/router';
 import store from '@/store';
 
@@ -15,7 +15,7 @@ function setNowMenu(value) {
     nowMenu.value = value
 }
 function logOutCommand() {
-    firebase.auth.signOut(localStorage.getItem('userId')).then(()=>{
+    auth.signOut(localStorage.getItem('userId')).then(()=>{
         router.replace("/login")
     })
 }
