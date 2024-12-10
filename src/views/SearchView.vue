@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import {db} from '@/firebase';
+import router from '@/router';
 
 const searchText = ref('')
 const dataList = ref([])
@@ -10,11 +11,15 @@ const userId = localStorage.getItem('userId');
 
 function addFriendCommand(value) {
   if(value.added) return;
-  db.collection("user").whereEqualTo("userId",userId).update({friendList:db.arrayUnion(value.userId)})
+  db.collection("user").where("userId","==",userId).update({friendList:db.arrayUnion(value.userId)})
 }
 
 onMounted(() => {
-  getData()
+  if(userId == null || userId == undefined){
+    router.replace('/login')
+  }else{
+    getData()
+  }
 })
  
 function getData() {

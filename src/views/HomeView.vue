@@ -9,7 +9,7 @@ const popupFlg = ref(false)
 const friendList = ref([])
 const userId = localStorage.getItem('userId');
 onMounted(()=>{
-  if(userId == null){
+  if(userId == null|| userId==undefined){
     router.replace('/login')
   }else{
     db.collection("user").whereEqualTo("userId",userId).get().then(res => {

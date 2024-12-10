@@ -281,7 +281,7 @@ input:focus{
 
 /* 로그인 페이지 */
 .loginPage{
-  padding: 40px 0;
+  padding: 40px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -322,7 +322,7 @@ input:focus{
 
 /* 회원가입 페이지 */
 .joinPage{
-  padding: 20px 0;
+  padding: 20px 40px;
   display: flex;
   flex-direction: column;
   gap: 8px;
