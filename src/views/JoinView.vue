@@ -14,7 +14,6 @@ const errFlg = ref(false)
 const errMsg = ref('')
 
 async function joinCommand() {
-  
   let check = joinCheck()
   if(!check) return
   await auth.createUserWithEmailAndPassword(idValue.value,passwordValue.value).then(async res => {
@@ -61,7 +60,7 @@ function joinCheck() {
     errMsg.value = '올바른 이메일 형식이 아닙니다.'
     return false
   }
-  db.collection("user").whereEqualTo("userId",idValue.value).get().then(res => {
+  db.collection("user").where("userId","==",idValue.value).get().then(res => {
     if(res.data.length >0){
       errFlg.value = true;
       errMsg.value = '이미 가입된 메일 주소입니다.'

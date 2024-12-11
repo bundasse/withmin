@@ -24,7 +24,7 @@ onMounted(() => {
  
 function getData() {
 
-  db.collection("user").whereEqualTo("userId",userId).get().then(res => {
+  db.collection("user").where("userId","==",userId).get().then(res => {
     friendList.value = res.data.friendList
   })
   db.collection("user").get().then(res => {

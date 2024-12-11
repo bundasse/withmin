@@ -12,7 +12,7 @@ onMounted(()=>{
   if(userId == null|| userId==undefined){
     router.replace('/login')
   }else{
-    db.collection("user").whereEqualTo("userId",userId).get().then(res => {
+    db.collection("user").where("userId","==",userId).get().then(res => {
       let checked = todayMushChecked(res.data.lastChkMush)
       if(res.data.chkMush && checked){
         usedFlg.value = true
@@ -25,7 +25,7 @@ onMounted(()=>{
 
 function getFriendMush() {
   friendList.value.forEach(e => {
-    db.collection("user").whereEqualTo("userId",e.userId).get().then(res => {
+    db.collection("user").where("userId","==",userId).get().then(res => {
       let checked = todayMushChecked(res.data.lastChkMush)
       if(res.data.chkMush && checked){
         e.chkMush = true
