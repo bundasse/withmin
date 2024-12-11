@@ -11,7 +11,7 @@ const passwordValue = ref()
 
 function loginCommand() {
     auth.signInWithEmailAndPassword(idValue.value, passwordValue.value).then(res => {
-
+      localStorage.setItem("userId",res.user.email)
       localStorage.setItem("refreshToken",res.user.refreshToken)
       localStorage.setItem("username",res.user.displayName)
       store.commit('setUsername',res.user.displayName)

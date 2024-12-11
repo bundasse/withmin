@@ -25,10 +25,20 @@ onMounted(() => {
 function getData() {
 
   db.collection("user").where("userId","==",userId).get().then(res => {
-    friendList.value = res.data.friendList
+    let data
+    res.forEach(doc => {
+      data = doc.data()
+    })
+    friendList.value = data.friendList
   })
   db.collection("user").get().then(res => {
-    datalist.value = res.data
+    let arr = []
+    res.forEach(doc => {
+      if(doc.data().userId != userId){
+        arr.push(doc.data())
+      }
+    })
+    datalist.value = arr
   })
 }
 

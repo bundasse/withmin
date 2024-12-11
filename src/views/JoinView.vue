@@ -7,7 +7,6 @@ const idValue = ref()
 const passwordValue = ref()
 const usernameValue = ref()
 const pikminNameValue = ref()
-const userpicUrl = ref()
 const twitterValue = ref()
 
 const errFlg = ref(false)
@@ -19,7 +18,6 @@ async function joinCommand() {
   await auth.createUserWithEmailAndPassword(idValue.value,passwordValue.value).then(async res => {
     await res.user.updateProfile({
       displayName:usernameValue.value,
-      photoURL:userpicUrl.value,
     })
     await db.collection("user").add({
       userId:idValue.value,
