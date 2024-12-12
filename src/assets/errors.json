@@ -1,0 +1,8 @@
+[
+    {"error":"auth/id-token-expired", "text":"ID토큰이 만료되었습니다."},
+    {"error":"auth/invalid-email", "text":"올바르지 않은 이메일 형식입니다."},
+    {"error":"auth/invalid-display-name", "text":"올바르지 않은 닉네임 형식입니다."},
+    {"error":"auth/invalid-id-token", "text":"사용할 수 없는 ID토큰입니다."},
+    {"error":"auth/internal-error", "text":"서버 오류가 발생했습니다."},
+    {"error":"auth/user-not-found", "text":"존재하지 않는 유저입니다."}
+]

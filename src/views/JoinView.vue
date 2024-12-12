@@ -1,7 +1,7 @@
 <script setup>
 import {ref} from 'vue';
 import  {auth, db}from '@/firebase';
-
+import errorlist from '@/assets/errors.json'
 
 const idValue = ref()
 const passwordValue = ref()
@@ -18,6 +18,15 @@ async function joinCommand() {
   await auth.createUserWithEmailAndPassword(idValue.value,passwordValue.value).then(async res => {
     await res.user.updateProfile({
       displayName:usernameValue.value,
+    }).catch(err =>{
+      let error = errorlist.filter(e => e.error == err.code)
+      if(error.length>0){
+        alert(error[0].text)
+        return
+      }else{
+        alert('에러가 발생했습니다. 코드:'+err.code)
+        return
+      }
     })
     await db.collection("user").add({
       userId:idValue.value,

@@ -5,6 +5,7 @@ import {ref} from 'vue';
 import { RouterLink } from 'vue-router'
 import router from '@/router';
 import store from '@/store';
+import errorlist from '@/assets/errors.json'
 
 const idValue = ref()
 const passwordValue = ref()
@@ -16,7 +17,14 @@ function loginCommand() {
       localStorage.setItem("username",res.user.displayName)
       store.commit('setUsername',res.user.displayName)
       router.replace("/")
-    }) 
+    }).catch(err =>{
+      let error = errorlist.filter(e => e.error == err.code)
+      if(error.length>0){
+        alert(error[0].text)
+      }else{
+        alert('에러가 발생했습니다. 코드:'+err.code)
+      }
+    })
 
 }
 
