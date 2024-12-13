@@ -16,6 +16,9 @@ function setNowMenu(value) {
 }
 function logOutCommand() {
     auth.signOut(localStorage.getItem('userId')).then(()=>{
+        localStorage.removeItem('userId')
+        localStorage.removeItem('username')
+        localStorage.removeItem('token')
         router.replace("/login")
     })
 }

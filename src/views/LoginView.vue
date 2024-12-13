@@ -15,6 +15,7 @@ function loginCommand() {
       localStorage.setItem("userId",res.user.email)
       localStorage.setItem("refreshToken",res.user.refreshToken)
       localStorage.setItem("username",res.user.displayName)
+      store.commit('setUserId',idValue.value)
       store.commit('setUsername',res.user.displayName)
       router.replace("/")
     }).catch(err =>{

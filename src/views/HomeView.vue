@@ -2,6 +2,7 @@
 import router from '@/router';
 import {ref, onMounted} from 'vue';
 import {db} from '@/firebase';
+import store from '@/store';
 
 const usedFlg = ref(false);
 const popupFlg = ref(false)
@@ -12,6 +13,9 @@ onMounted(()=>{
   if(userId == null|| userId==undefined){
     router.replace('/login')
   }else{
+    const username = localStorage.getItem('username')
+    store.commit('setUserId',userId)
+    store.commit('setUsername',username)
     db.collection("user").where("userId","==",userId).get().then(res => {
       let checked = todayMushChecked(res.data.lastChkMush)
       if(res.data.chkMush && checked){
