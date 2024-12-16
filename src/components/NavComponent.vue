@@ -63,9 +63,6 @@ document.addEventListener("click",(e)=>{
         </div>
         <div class="userInfo">
             <div class="userMenu">
-                <!-- <div class="userIcon">
-                    <img src="https://placehold.co/200x200/orange/white" alt="usericon">
-                </div> -->
                 {{ store.state.username }}
             </div>
             <ul v-if="userMenuFlg" class="userNavMenu">

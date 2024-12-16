@@ -67,13 +67,6 @@ function joinCheck() {
     errMsg.value = '올바른 이메일 형식이 아닙니다.'
     return false
   }
-  db.collection("user").where("userId","==",idValue.value).get().then(res => {
-    if(res.data.length >0){
-      errFlg.value = true;
-      errMsg.value = '이미 가입된 메일 주소입니다.'
-      return false
-    }
-  })
     
   errFlg.value = false;
   return true

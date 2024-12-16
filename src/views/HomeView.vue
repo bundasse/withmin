@@ -29,7 +29,7 @@ onMounted(()=>{
 
 function getFriendMush() {
   friendList.value.forEach(e => {
-    db.collection("user").where("userId","==",userId).get().then(res => {
+    db.collection("user").where("userId","==",e).get().then(res => {
       let checked = todayMushChecked(res.data.lastChkMush)
       if(res.data.chkMush && checked){
         e.chkMush = true
