@@ -10,6 +10,9 @@ import errorlist from '@/assets/errors.json'
 const idValue = ref()
 const passwordValue = ref()
 
+const errFlg = ref(false)
+const errMsg = ref('')
+
 function loginCommand() {
     auth.signInWithEmailAndPassword(idValue.value, passwordValue.value).then(res => {
       localStorage.setItem("userId",res.user.email)
@@ -17,13 +20,17 @@ function loginCommand() {
       localStorage.setItem("username",res.user.displayName)
       store.commit('setUserId',idValue.value)
       store.commit('setUsername',res.user.displayName)
+      errFlg.value = false
       router.replace("/")
     }).catch(err =>{
+      errFlg.value = true
       let error = errorlist.filter(e => e.error == err.code)
       if(error.length>0){
-        alert(error[0].text)
+        errMsg.value =error[0].text
+        return
       }else{
-        alert('에러가 발생했습니다. 코드:'+err.code)
+        errMsg.value ='에러가 발생했습니다. 코드:'+err.code
+        return
       }
     })
 
@@ -34,14 +41,17 @@ function loginCommand() {
 <template>
   <div>
     <div class="loginPage">
-        <div>
+      <div>
+        <div class="inputField">
             <label for="txtId">이메일</label>
             <input type="text" id="txtId" v-model="idValue">
         </div>
-        <div>
+        <div class="inputField">
             <label for="txtPassword">비밀번호</label>
             <input type="password" id="txtPassword" v-model="passwordValue">
         </div>
+        <p class="errMsgField" v-if="errFlg">{{ errMsg }}</p>
+      </div>
         <button @click="loginCommand">로그인</button>
         <div class="linkTo">
           <RouterLink to="/join">회원가입</RouterLink>

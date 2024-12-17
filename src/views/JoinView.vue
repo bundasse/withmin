@@ -19,12 +19,13 @@ async function joinCommand() {
     await res.user.updateProfile({
       displayName:usernameValue.value,
     }).catch(err =>{
+      errFlg.value = true
       let error = errorlist.filter(e => e.error == err.code)
       if(error.length>0){
-        alert(error[0].text)
+        errMsg.value =error[0].text
         return
       }else{
-        alert('에러가 발생했습니다. 코드:'+err.code)
+        errMsg.value ='에러가 발생했습니다. 코드:'+err.code
         return
       }
     })
