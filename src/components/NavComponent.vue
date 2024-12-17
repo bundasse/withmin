@@ -19,6 +19,8 @@ function logOutCommand() {
         localStorage.removeItem('userId')
         localStorage.removeItem('username')
         localStorage.removeItem('token')
+        store.commit("userId",null)
+        store.commit("username",null)
         router.replace("/login")
     })
 }
