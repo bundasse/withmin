@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import {db} from '@/firebase';
+import firebase from 'firebase/compat';
 import router from '@/router';
 
 const searchText = ref('')
@@ -10,8 +11,11 @@ const friendList = ref([])
 const userId = localStorage.getItem('userId');
 
 function addFriendCommand(value) {
-  if(value.added) return;
-  db.collection("user").where("userId","==",userId).update({friendList:db.arrayUnion(value.userId)})
+  if(value.added){
+    db.collection("user").where("userId","==",userId).update({friendList:firebase.firestore.FieldValue.arrayRemove(value.userId)})
+  }else{
+    db.collection("user").where("userId","==",userId).update({friendList:firebase.firestore.FieldValue.arrayUnion(value.userId)})
+  }
 }
 
 onMounted(() => {
@@ -84,7 +88,7 @@ function searchCommand() {
               {{data.userName}}
             </p>
           </div>
-          <button class="addFriend" :class="data.added && 'added'" @click="addFriendCommand(data)">추가</button>
+          <button class="addFriend" :class="data.added && 'added'" @click="addFriendCommand(data)">{{data.added? '해제':'추가'}}</button>
         </li>
       </ul>
     </div>
