@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import {db} from '@/firebase';
-import firebase from 'firebase/compat';
+import firebase from 'firebase/compat/app';
 import router from '@/router';
 
 const searchText = ref('')
