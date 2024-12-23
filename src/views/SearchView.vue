@@ -6,7 +6,7 @@ import router from '@/router';
 
 const searchText = ref('')
 const dataList = ref([])
-const datalist = ref(['data'])
+const datalist = ref([])
 const friendList = ref([])
 const userId = localStorage.getItem('userId');
 
