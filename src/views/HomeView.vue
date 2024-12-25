@@ -87,8 +87,8 @@ function setPopupFlg(value) {
       <div class="popUpBox">
         <p>오늘의 버섯 3회를 모두 완료하셨나요?</p>
         <div class="buttonContainer">
-          <button @click="checkMushroom()">확인</button>
-          <button @click="setPopupFlg(false)">취소</button>
+          <button @click="checkMushroom()">네</button>
+          <button @click="setPopupFlg(false)">아니오</button>
         </div>
       </div>
     </div>
