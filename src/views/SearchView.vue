@@ -27,7 +27,6 @@ onMounted(() => {
 })
  
 function getData() {
-
   db.collection("user").where("userId","==",userId).get().then(res => {
     let data
     res.forEach(doc => {
