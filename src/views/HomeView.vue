@@ -38,7 +38,9 @@ function getFriendMush() {
       }
     })
   })
-
+friendList.value.sort((a,b) => {
+  return a.chkMush || b.chkMush
+})
 }
 
 function todayMushChecked(value) {
