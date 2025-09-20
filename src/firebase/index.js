@@ -3,12 +3,12 @@ import "firebase/compat/auth";
 import "firebase/compat/firestore";
 
 const firebaseConfig = {
-    apiKey: import.meta.env.VITE_APIKEY,
+    apiKey: 'AIzaSyBjyC1N08oKfhM0VKdhk5_-TCBJq98IA8Q',
     authDomain: "withmin-c9467.firebaseapp.com",
     projectId: "withmin-c9467",
     storageBucket: "withmin-c9467.firebasestorage.app",
-    messagingSenderId: import.meta.env.VITE_MESSAGINGSENDERID,
-    appId: import.meta.env.VITE_APPID
+    messagingSenderId: '442896909281',
+    appId: '1:442896909281:web:8d36ea0917f6deb64708a0'
     };  
     
 

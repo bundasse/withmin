@@ -106,9 +106,11 @@ input:focus{
   right: 0;
   width: 140px;
   padding: 10px;
-  border-radius: 0 0 10px 10px;
-  background-color: lightseagreen;
-  color: white;
+  border-radius: 0 0 0 10px;
+  background-color: white;
+  border-left: 1px solid lightseagreen;
+  border-bottom: 1px solid lightseagreen;
+
   z-index: 1;
 }
 
